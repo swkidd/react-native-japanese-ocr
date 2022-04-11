@@ -57,7 +57,6 @@ public class JapaneseOcrModule extends ReactContextBaseJavaModule {
           e -> {
             promise.resolve(null);
           });
-
     } catch (IOException ignored) {
       promise.resolve(null);
     }
@@ -85,7 +84,6 @@ public class JapaneseOcrModule extends ReactContextBaseJavaModule {
     if (pointsList == null) {
       return p;
     }
-
     for (Point point : pointsList) {
       WritableMap i = Arguments.createMap();
       i.putDouble("x", point.x);
