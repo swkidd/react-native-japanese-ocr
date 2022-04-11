@@ -12,8 +12,12 @@ import com.facebook.react.module.annotations.ReactModule;
 public class JapaneseOcrModule extends ReactContextBaseJavaModule {
     public static final String NAME = "JapaneseOcr";
 
+    public final TextRecognizer recognizer;
+
+
     public JapaneseOcrModule(ReactApplicationContext reactContext) {
         super(reactContext);
+        recognizer = TextRecognition.getClient(new JapaneseTextRecognizerOptions.Builder().build());
     }
 
     @Override
@@ -23,12 +27,14 @@ public class JapaneseOcrModule extends ReactContextBaseJavaModule {
     }
 
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
-    public void multiply(int a, int b, Promise promise) {
-        promise.resolve(a * b);
-    }
+    public void ocr(int a, int b, Promise promise) {
+        InputImage image;
 
-    public static native int nativeMultiply(int a, int b);
+        try {
+            image = InputImage.fromFilePath(reactContext, uri);
+        } catch (IOException ignored) {}
+
+        promise.resolve(result);
+
 }
