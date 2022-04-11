@@ -17,6 +17,10 @@ const JapaneseOcr = NativeModules.JapaneseOcr
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return JapaneseOcr.multiply(a, b);
+export function ocr(path: string): Promise<number> {
+  return JapaneseOcr.ocr(path);
+}
+
+export function ocrFromURL(path: string): Promise<number> {
+  return JapaneseOcr.ocrFromURL(path);
 }
