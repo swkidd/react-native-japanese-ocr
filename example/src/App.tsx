@@ -3,21 +3,24 @@ import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { ocrFromURL } from 'react-native-japanese-ocr';
 
-const url =
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Road_traffic_sign_with_Russian%2C_Nemuro%2C_Hokkaido%2C_Japan.jpg/360px-Road_traffic_sign_with_Russian%2C_Nemuro%2C_Hokkaido%2C_Japan.jpg';
+const url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjU3vG_TIsinFxVHu8mfO9q2KhnkVyUfFmuQ&usqp=CAU';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [result, setResult] = React.useState();
 
   React.useEffect(() => {
     ocrFromURL(url)
-      .then((r) => setResult(JSON.stringify(r)))
+      .then((r) => {
+        let text = '';
+        r.forEach((b) => (text += b.text));
+        setResult(text);
+      })
       .catch((e) => console.log(e));
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text selectable={true}>Result: {result}</Text>
     </View>
   );
 }
