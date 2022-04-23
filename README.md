@@ -2,8 +2,6 @@
 
 A React-Native package for preforming OCR on Japanese text using Google MLKit TextRecognition v2
 
-### CURRENTLY ONLY ANDROID IS SUPPORTED
-
 ## Installation
 
 ```sh
