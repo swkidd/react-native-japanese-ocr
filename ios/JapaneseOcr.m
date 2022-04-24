@@ -63,6 +63,27 @@ RCT_REMAP_METHOD(ocrFromURL,
     [[JapaneseOcr recognizer] processImage:visionImage completion:ocrCompletionBlock];
 }
 
+RCT_REMAP_METHOD(ocrFromBase64,
+                 base64String:(NSString *)base64String
+                 withResolver:(RCTPromiseResolveBlock)resolve
+                 withRejecter:(RCTPromiseRejectBlock)reject)
+{
+    NSArray *components = [base64String componentsSeparatedByString:@","];
+    NSString *dataString = [components lastObject];
+    NSData *data = [[NSData alloc] initWithBase64EncodedString:dataString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    UIImage *image = [UIImage imageWithData:data];
+    MLKVisionImage *visionImage = [[MLKVisionImage alloc] initWithImage:image];
+
+    void (^ocrCompletionBlock)(MLKText *_Nullable, NSError *_Nullable) = ^(MLKText *_Nullable result, NSError *_Nullable error) {
+      if (error != nil || result == nil) {
+          reject(@"error", @"ocr-error", error);
+      }
+      resolve(prepareOutput(result));
+    };
+
+    [[JapaneseOcr recognizer] processImage:visionImage completion:ocrCompletionBlock];
+}
+
 NSMutableArray* getCornerPoints(NSArray *cornerPoints) {
     NSMutableArray *result = [NSMutableArray array];
     

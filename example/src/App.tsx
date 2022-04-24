@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { ocrFromURL } from 'react-native-japanese-ocr';
+import { ocrFromBase64 } from 'react-native-japanese-ocr';
 
-const url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjU3vG_TIsinFxVHu8mfO9q2KhnkVyUfFmuQ&usqp=CAU';
+const url = '';
 
 export default function App() {
   const [result, setResult] = React.useState();
 
   React.useEffect(() => {
-    ocrFromURL(url)
+    ocrFromBase64(url)
       .then((r) => {
         let text = '';
         r.forEach((b) => (text += b.text));

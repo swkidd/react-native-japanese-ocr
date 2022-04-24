@@ -24,3 +24,7 @@ export function ocr(path: string): Promise<any> {
 export function ocrFromURL(path: string): Promise<any> {
   return JapaneseOcr.ocrFromURL(path);
 }
+
+export function ocrFromBase64(base64String: string): Promise<any> {
+  return JapaneseOcr.ocrFromBase64(base64String);
+}
