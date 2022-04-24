@@ -1,6 +1,6 @@
 {
   "name": "react-native-japanese-ocr",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A React-Native package for preforming OCR on Japanese text using Google MLKit TextRecognition v2",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
